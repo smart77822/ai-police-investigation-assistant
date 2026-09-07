@@ -59,7 +59,7 @@ export function ReportPreview() {
   }
 
   return (
-    <main className="min-h-dvh bg-paper-texture p-4 sm:p-8">
+    <main className="min-h-dvh bg-paper-texture p-4 sm:p-8 print:p-0">
       <div className="no-print mx-auto mb-5 flex max-w-6xl flex-wrap items-center justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Completed report</p>
