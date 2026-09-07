@@ -2,7 +2,7 @@ import { auth } from '@/lib/auth'
 import { interpretSystemPrompt, transformSystemPrompt, verifySystemPrompt, reportSnapshot } from '@/lib/ai/prompts'
 import { normalizeSpokenNumbers } from '@/lib/urdu-numbers'
 import { type Lang, type ReportData } from '@/lib/report-schema'
-import { generateText, Output } from 'ai'
+import { generateText, gateway, Output } from 'ai'
 import { headers } from 'next/headers'
 import { z } from 'zod'
 
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
       const normalized = normalizeSpokenNumbers(body.text)
       const today = new Date().toISOString().slice(0, 10)
       const { output } = await generateText({
-        model: MODEL,
+        model: gateway(MODEL),
         output: Output.object({ schema: interpretSchema }),
         system: interpretSystemPrompt({
           lang: body.lang as Lang,
@@ -105,7 +105,7 @@ export async function POST(req: Request) {
 
     if (body.mode === 'transform') {
       const { text } = await generateText({
-        model: MODEL,
+        model: gateway(MODEL),
         system: transformSystemPrompt(body.action, body.targetLang as Lang),
         prompt: body.text,
       })
@@ -113,14 +113,15 @@ export async function POST(req: Request) {
     }
 
     const { output } = await generateText({
-      model: MODEL,
+      model: gateway(MODEL),
       output: Output.object({ schema: verifySchema }),
       system: verifySystemPrompt(),
       prompt: `REPORT CONTENTS:\n${reportSnapshot(body.data as ReportData)}`,
     })
     return Response.json(output)
   } catch (err) {
-    console.error('[ai] request failed', err instanceof Error ? err.message : err)
-    return Response.json({ error: 'AI request failed' }, { status: 500 })
+    const message = err instanceof Error ? err.message : 'Unknown AI provider error'
+    console.error('[v0] AI request failed:', message)
+    return Response.json({ error: 'AI request failed', detail: process.env.NODE_ENV === 'development' ? message : undefined }, { status: 502 })
   }
 }
