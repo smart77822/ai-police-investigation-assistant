@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getDashboardStats, getLatestReportId, listReports } from '@/app/actions/reports'
-import { createReportAndRedirect } from '@/app/actions/reports'
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() })
@@ -29,7 +28,7 @@ export default async function DashboardPage() {
                 <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Investigation reports</h1>
                 <p className="mt-2 max-w-xl text-sm text-muted-foreground">Prepare official reports with structured forms, source-grounded AI drafting, and secure private storage.</p>
               </div>
-              <form action={createReportAndRedirect}><Button size="lg" className="gap-2"><FilePlus2 className="size-4" />New report</Button></form>
+              <Link href="/reports/new" className="inline-flex h-11 items-center gap-2 rounded-md bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"><FilePlus2 className="size-4" />New report</Link>
             </header>
 
             <section className="grid gap-4 sm:grid-cols-3">
