@@ -1,0 +1,73 @@
+import type { Lang } from './report-schema'
+
+type Dict = Record<string, Record<Lang, string>>
+
+export const STRINGS: Dict = {
+  appName: { ur: 'اے آئی پولیس تفتیشی رپورٹ اسسٹنٹ', en: 'AI Police Investigation Report Assistant', roman: 'AI Police Investigation Report Assistant' },
+  dashboard: { ur: 'ڈیش بورڈ', en: 'Dashboard', roman: 'Dashboard' },
+  newReport: { ur: 'نئی رپورٹ', en: 'New Report', roman: 'Nai Report' },
+  page1: { ur: 'صفحہ ۱', en: 'Page 1', roman: 'Page 1' },
+  page2: { ur: 'صفحہ ۲', en: 'Page 2', roman: 'Page 2' },
+  page3: { ur: 'صفحہ ۳', en: 'Page 3', roman: 'Page 3' },
+  aiAssistant: { ur: 'اے آئی اسسٹنٹ', en: 'AI Assistant', roman: 'AI Assistant' },
+  savedReports: { ur: 'محفوظ رپورٹس', en: 'Saved Reports', roman: 'Mehfooz Reports' },
+  settings: { ur: 'ترتیبات', en: 'Settings', roman: 'Settings' },
+  signOut: { ur: 'لاگ آؤٹ', en: 'Sign out', roman: 'Log out' },
+  preview: { ur: 'رپورٹ کا جائزہ', en: 'Preview Report', roman: 'Report Preview' },
+  save: { ur: 'محفوظ کریں', en: 'Save', roman: 'Save' },
+  saved: { ur: 'محفوظ ہو گیا', en: 'Saved', roman: 'Save ho gaya' },
+  saving: { ur: 'محفوظ ہو رہا ہے…', en: 'Saving…', roman: 'Save ho raha hai…' },
+  unsaved: { ur: 'غیر محفوظ تبدیلیاں', en: 'Unsaved changes', roman: 'Unsaved changes' },
+  print: { ur: 'پرنٹ', en: 'Print', roman: 'Print' },
+  downloadPdf: { ur: 'PDF ڈاؤن لوڈ', en: 'Download PDF', roman: 'PDF Download' },
+  downloadDocx: { ur: 'DOCX ڈاؤن لوڈ', en: 'Download DOCX', roman: 'DOCX Download' },
+  copyText: { ur: 'متن کاپی کریں', en: 'Copy Text', roman: 'Text Copy' },
+  speak: { ur: 'بولیں', en: 'Speak', roman: 'Bolain' },
+  listening: { ur: 'سن رہا ہے…', en: 'Listening…', roman: 'Sun raha hai…' },
+  stop: { ur: 'رکیں', en: 'Stop', roman: 'Rukain' },
+  tellAi: { ur: 'اے آئی کو بتائیں آپ کیا چاہتے ہیں…', en: 'Tell AI what you want...', roman: 'AI ko batain aap kya chahte hain…' },
+  confirmInsert: { ur: 'تصدیق کریں اور درج کریں', en: 'Confirm & Insert', roman: 'Confirm & Insert' },
+  yesUseIt: { ur: 'جی ہاں، استعمال کریں', en: 'Yes, Use It', roman: 'Ji haan, use karain' },
+  edit: { ur: 'ترمیم', en: 'Edit', roman: 'Edit' },
+  cancel: { ur: 'منسوخ', en: 'Cancel', roman: 'Cancel' },
+  undo: { ur: 'واپس', en: 'Undo', roman: 'Undo' },
+  redo: { ur: 'دوبارہ', en: 'Redo', roman: 'Redo' },
+  clear: { ur: 'صاف کریں', en: 'Clear', roman: 'Clear' },
+  copy: { ur: 'کاپی', en: 'Copy', roman: 'Copy' },
+  paste: { ur: 'پیسٹ', en: 'Paste', roman: 'Paste' },
+  aiRewrite: { ur: 'اے آئی: سرکاری زبان', en: 'AI Rewrite (Official)', roman: 'AI Rewrite' },
+  aiTranslate: { ur: 'اے آئی: ترجمہ', en: 'AI Translate', roman: 'AI Translate' },
+  aiImprove: { ur: 'اے آئی: بہتر کریں', en: 'AI Improve', roman: 'AI Improve' },
+  voiceInput: { ur: 'آواز سے لکھیں', en: 'Voice Input', roman: 'Voice Input' },
+  addRow: { ur: 'نئی سطر شامل کریں', en: 'Add Row', roman: 'Nai Row' },
+  removeRow: { ur: 'سطر حذف کریں', en: 'Remove Row', roman: 'Row Delete' },
+  verify: { ur: 'تصدیقی جائزہ', en: 'Verification', roman: 'Verification' },
+  language: { ur: 'زبان', en: 'Language', roman: 'Zaban' },
+  urdu: { ur: 'اردو', en: 'Urdu', roman: 'Urdu' },
+  english: { ur: 'انگریزی', en: 'English', roman: 'English' },
+  romanUrdu: { ur: 'رومن اردو', en: 'Roman Urdu', roman: 'Roman Urdu' },
+  aiDraft: { ur: 'اے آئی مسودہ — جائزہ درکار', en: 'AI draft — review required', roman: 'AI draft — review zaroori' },
+  factProvided: { ur: 'حقیقت: صارف نے فراہم کی', en: 'FACT PROVIDED BY USER', roman: 'FACT: user ne di' },
+  aiFormatting: { ur: 'اے آئی: صرف زبان و ترتیب', en: 'AI-GENERATED FORMATTING/LANGUAGE', roman: 'AI: sirf zaban/tarteeb' },
+  search: { ur: 'تلاش…', en: 'Search…', roman: 'Talash…' },
+  open: { ur: 'کھولیں', en: 'Open', roman: 'Open' },
+  duplicate: { ur: 'نقل بنائیں', en: 'Duplicate', roman: 'Duplicate' },
+  export: { ur: 'برآمد', en: 'Export', roman: 'Export' },
+  delete: { ur: 'حذف کریں', en: 'Delete', roman: 'Delete' },
+  noReports: { ur: 'ابھی کوئی رپورٹ محفوظ نہیں', en: 'No saved reports yet', roman: 'Abhi koi report nahi' },
+  applyToField: { ur: 'اس فیلڈ میں لگائیں', en: 'Apply to field', roman: 'Field mein lagain' },
+  currentField: { ur: 'موجودہ فیلڈ', en: 'Current field', roman: 'Current field' },
+  none: { ur: 'کوئی نہیں', en: 'None', roman: 'Koi nahi' },
+  infoRequired: { ur: '[معلومات درکار]', en: '[INFORMATION REQUIRED]', roman: '[INFORMATION REQUIRED]' },
+  unclear: { ur: '[غیر واضح معلومات]', en: '[UNCLEAR INFORMATION]', roman: '[UNCLEAR INFORMATION]' },
+}
+
+export function t(key: keyof typeof STRINGS | string, lang: Lang) {
+  return STRINGS[key]?.[lang] ?? STRINGS[key]?.en ?? String(key)
+}
+
+export const SPEECH_LOCALES: Record<Lang, string> = {
+  ur: 'ur-PK',
+  en: 'en-US',
+  roman: 'en-IN',
+}
