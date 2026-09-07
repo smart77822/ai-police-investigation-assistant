@@ -64,7 +64,6 @@ export async function createReport(initial?: ReportData) {
     ...summaryFromData(data),
     encryptedData: encryptJson(data),
   })
-  revalidatePath('/reports')
   return id
 }
 
