@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { PAGE_TITLES } from '@/lib/report-schema'
 import { cn } from '@/lib/utils'
 
-export function ReportToolbar({ onVerify }: { onVerify: () => void }) {
+export function ReportToolbar({ onVerify = () => undefined }: { onVerify?: () => void }) {
   const { id, page, undo, redo, canUndo, canRedo, saveState, saveNow, assistantOpen, setAssistantOpen } = useReport()
   const { t, lang } = useLang()
   const router = useRouter()

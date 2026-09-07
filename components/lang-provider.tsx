@@ -16,7 +16,7 @@ interface LangContextValue {
 
 const LangContext = createContext<LangContextValue | null>(null)
 
-export function LangProvider({ settings, children }: { settings: Settings; children: React.ReactNode }) {
+export function LangProvider({ settings = { uiLanguage: 'ur', voiceLanguage: 'ur-PK', defaultDistrict: '', defaultPoliceStation: '', officerName: '', officerRank: '' }, children }: { settings?: Settings; children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>(settings.uiLanguage)
 
   const setLang = useCallback(
