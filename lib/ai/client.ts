@@ -41,7 +41,7 @@ async function post<T>(body: unknown): Promise<T> {
     body: JSON.stringify(body),
   })
   const json = await res.json()
-  if (!res.ok) throw new Error(json.error ?? 'AI request failed')
+  if (!res.ok) throw new Error(json.detail ? `${json.error ?? 'AI request failed'}: ${json.detail}` : (json.error ?? 'AI request failed'))
   return json as T
 }
 
