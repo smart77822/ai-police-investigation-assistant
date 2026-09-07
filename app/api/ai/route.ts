@@ -121,7 +121,16 @@ export async function POST(req: Request) {
     return Response.json(output)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown AI provider error'
+    const billingRequired = /credit card|free credits|billing/i.test(message)
     console.error('[v0] AI request failed:', message)
-    return Response.json({ error: 'AI request failed', detail: process.env.NODE_ENV === 'development' ? message : undefined }, { status: 502 })
+    return Response.json(
+      {
+        error: billingRequired
+          ? 'AI service billing is not enabled. Add a payment method to your Vercel AI Gateway account.'
+          : 'AI request failed',
+        detail: process.env.NODE_ENV === 'development' ? message : undefined,
+      },
+      { status: 502 },
+    )
   }
 }
