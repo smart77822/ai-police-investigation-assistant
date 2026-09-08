@@ -36,6 +36,14 @@ export function ReportPreview() {
     }
   }
 
+  function printReport() {
+    document.body.classList.add('report-printing')
+    window.setTimeout(() => {
+      window.print()
+      window.setTimeout(() => document.body.classList.remove('report-printing'), 500)
+    }, 50)
+  }
+
   function downloadText() {
     const text = [
       'AI Police Investigation Report',
@@ -67,7 +75,7 @@ export function ReportPreview() {
           <p className="mt-1 text-sm text-muted-foreground">The PDF preserves the filled official form pages, tables, numbering, and Urdu layout.</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button variant="outline" onClick={() => window.print()} className="gap-2"><Printer className="size-4" />Print three pages</Button>
+          <Button variant="outline" onClick={printReport} className="gap-2"><Printer className="size-4" />Print three pages</Button>
           <Button onClick={downloadPdf} disabled={isDownloading} className="gap-2"><FileDown className="size-4" />{isDownloading ? 'Creating PDF…' : 'Save three-page PDF'}</Button>
           <Button variant="secondary" onClick={downloadText} className="gap-2"><Download className="size-4" />Download text</Button>
         </div>
