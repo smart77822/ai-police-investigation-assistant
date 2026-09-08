@@ -37,10 +37,15 @@ export function ReportPreview() {
   }
 
   function printReport() {
+    const previousTitle = document.title
+    document.title = 'Police Investigation Report'
     document.body.classList.add('report-printing')
     window.setTimeout(() => {
       window.print()
-      window.setTimeout(() => document.body.classList.remove('report-printing'), 500)
+      window.setTimeout(() => {
+        document.body.classList.remove('report-printing')
+        document.title = previousTitle
+      }, 500)
     }, 50)
   }
 
