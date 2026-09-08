@@ -1,77 +1,102 @@
 "use client"
 
 import { FormField } from "@/components/report/form-field"
-import { useReport } from "@/components/report/report-provider"
 
-export const FORM_IMAGES = {
-  pageOne: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CamScanner%2009-08-2026%2000.24_1-LedNAPqaijDJexavfOJ3gRc3zYcSZu.jpg",
-  pageTwo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CamScanner%2009-08-2026%2000.24_3-u6LoiRiSAAVOOWpfDMfqD027q5J0F2.jpg",
-  pageThree: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CamScanner%2009-08-2026%2000.24_2-LGDX8LbE3yXZcL34TvffXNiI6Sk5zN.jpg",
+type Field = {
+  id: string
+  label: string
+  type?: "text" | "textarea" | "date" | "time"
+  className?: string
 }
 
-type Overlay = { id: string; className: string; label: string; type?: 'text' | 'textarea' | 'date' | 'time' }
-
-const PAGE_ONE_OVERLAYS: Overlay[] = [
-  { id: 'page1.bookNumber', className: 'left-[72%] top-[3.2%] w-[22%]', label: 'بک نمبر' },
-  { id: 'page1.policeStation', className: 'left-[72%] top-[10.5%] w-[22%]', label: 'تھانہ' },
-  { id: 'page1.district', className: 'left-[5%] top-[10.5%] w-[22%]', label: 'ضلع' },
-  { id: 'page1.firNumber', className: 'left-[62%] top-[17.5%] w-[32%]', label: 'ابتدائی اطلاعی رپورٹ نمبر' },
-  { id: 'page1.occurrenceDate', className: 'left-[64%] top-[25%] w-[29%]', label: 'تاریخ وقوعہ', type: 'date' },
-  { id: 'page1.occurrenceTime', className: 'left-[38%] top-[25%] w-[20%]', label: 'وقت وقوعہ', type: 'time' },
-  { id: 'page1.occurrencePlace', className: 'left-[5%] top-[25%] w-[28%]', label: 'مقام وقوعہ' },
-  { id: 'page1.offence', className: 'left-[45%] top-[32%] w-[49%]', label: 'جرم' },
-  { id: 'page1.receivedAtStationDate', className: 'left-[67%] top-[39%] w-[25%]', label: 'موصول تاریخ', type: 'date' },
-  { id: 'page1.receivedAtStationTime', className: 'left-[38%] top-[39%] w-[22%]', label: 'موصول وقت', type: 'time' },
-  { id: 'page1.dispatchedFromStationDate', className: 'left-[67%] top-[45%] w-[25%]', label: 'روانگی تاریخ', type: 'date' },
-  { id: 'page1.dispatchedFromStationTime', className: 'left-[38%] top-[45%] w-[22%]', label: 'روانگی وقت', type: 'time' },
-  { id: 'page1.entries[0].investigationDetails', className: 'left-[5%] top-[54%] w-[87%] h-[35%]', label: 'حالات مقدمہ', type: 'textarea' },
+const pageOne: Field[] = [
+  { id: "page1.bookNumber", label: "بک نمبر" },
+  { id: "page1.policeStation", label: "تھانہ" },
+  { id: "page1.district", label: "ضلع" },
+  { id: "page1.firNumber", label: "ابتدائی اطلاعی رپورٹ نمبر" },
+  { id: "page1.occurrenceDate", label: "تاریخ وقوعہ", type: "date" },
+  { id: "page1.occurrenceTime", label: "وقت وقوعہ", type: "time" },
+  { id: "page1.occurrencePlace", label: "مقام وقوعہ" },
+  { id: "page1.offence", label: "جرم" },
+  { id: "page1.receivedAtStationDate", label: "تھانہ میں وصولی کی تاریخ", type: "date" },
+  { id: "page1.receivedAtStationTime", label: "تھانہ میں وصولی کا وقت", type: "time" },
+  { id: "page1.dispatchedFromStationDate", label: "تھانہ سے روانگی کی تاریخ", type: "date" },
+  { id: "page1.dispatchedFromStationTime", label: "تھانہ سے روانگی کا وقت", type: "time" },
+  { id: "page1.entries[0].investigationDetails", label: "حالات مقدمہ اور کارروائی کی مکمل تفصیل", type: "textarea", className: "md:col-span-2" },
 ]
 
-const PAGE_TWO_OVERLAYS: Overlay[] = [
-  { id: 'page2.district', className: 'left-[74%] top-[4%] w-[20%]', label: 'ضلع' },
-  { id: 'page2.policeStation', className: 'left-[52%] top-[4%] w-[20%]', label: 'تھانہ' },
-  { id: 'page2.caseNumber', className: 'left-[29%] top-[4%] w-[20%]', label: 'مقدمہ نمبر' },
-  { id: 'page2.offence', className: 'left-[5%] top-[4%] w-[22%]', label: 'جرم' },
-  { id: 'page2.caseDate', className: 'left-[70%] top-[11%] w-[24%]', label: 'مقدمہ تاریخ', type: 'date' },
-  { id: 'page2.challanDate', className: 'left-[42%] top-[11%] w-[24%]', label: 'چالان تاریخ', type: 'date' },
-  { id: 'page2.rows[0].briefFacts', className: 'left-[5%] top-[20%] w-[87%] h-[68%]', label: 'تفصیل', type: 'textarea' },
+const pageTwo: Field[] = [
+  { id: "page2.district", label: "ضلع" },
+  { id: "page2.policeStation", label: "تھانہ" },
+  { id: "page2.caseNumber", label: "مقدمہ نمبر" },
+  { id: "page2.offence", label: "جرم / دفعات" },
+  { id: "page2.caseDate", label: "مقدمہ کی تاریخ", type: "date" },
+  { id: "page2.challanDate", label: "چالان / رپورٹ کی تاریخ", type: "date" },
+  { id: "page2.rows[0].briefFacts", label: "تحقیقات، گواہان، دستاویزات اور مختصر حقائق", type: "textarea", className: "md:col-span-2" },
 ]
 
-const PAGE_THREE_OVERLAYS: Overlay[] = [
-  { id: 'page3.bookNumber', className: 'left-[74%] top-[3%] w-[20%]', label: 'بک نمبر' },
-  { id: 'page3.district', className: 'left-[74%] top-[9%] w-[20%]', label: 'ضلع' },
-  { id: 'page3.policeStation', className: 'left-[51%] top-[9%] w-[21%]', label: 'تھانہ' },
-  { id: 'page3.caseNumber', className: 'left-[28%] top-[9%] w-[21%]', label: 'مقدمہ نمبر' },
-  { id: 'page3.offence', className: 'left-[5%] top-[9%] w-[21%]', label: 'جرم' },
-  { id: 'page3.entries[0].margin', className: 'left-[72%] top-[27%] w-[20%]', label: 'حاشیہ' },
-  { id: 'page3.entries[0].text', className: 'left-[5%] top-[27%] w-[64%] h-[60%]', label: 'حالات و کارروائی', type: 'textarea' },
+const pageThree: Field[] = [
+  { id: "page3.bookNumber", label: "بک نمبر" },
+  { id: "page3.district", label: "ضلع" },
+  { id: "page3.policeStation", label: "تھانہ" },
+  { id: "page3.caseNumber", label: "مقدمہ نمبر" },
+  { id: "page3.offence", label: "جرم / دفعات" },
+  { id: "page3.complainant", label: "مدعی / درخواست گزار" },
+  { id: "page3.accused", label: "ملزمان" },
+  { id: "page3.entries[0].margin", label: "حاشیہ / ملاحظات" },
+  { id: "page3.entries[0].text", label: "حالات مقدمہ، تفتیشی کارروائی اور نتیجہ", type: "textarea", className: "md:col-span-2" },
 ]
 
-export function ExactTemplatePage({ page, image, editable = true }: { page: 1 | 2 | 3; image: string; editable?: boolean }) {
-  const overlays = page === 1 ? PAGE_ONE_OVERLAYS : page === 2 ? PAGE_TWO_OVERLAYS : PAGE_THREE_OVERLAYS
-  const { getField } = useReport()
+const titles = {
+  1: { ur: "رپورٹ مخفی بیروی", en: "ابتدائی اطلاعی رپورٹ" },
+  2: { ur: "رپورٹ مخفی بیروی — جاری", en: "تحقیقات اور کارروائی" },
+  3: { ur: "رپورٹ مخفی بیروی — تفصیلی جدول", en: "گواہان، دفعات اور حتمی تفصیل" },
+} as const
+
+export function ExactTemplatePage({ page, editable = true }: { page: 1 | 2 | 3; image?: string; editable?: boolean }) {
+  const fields = page === 1 ? pageOne : page === 2 ? pageTwo : pageThree
+  const title = titles[page]
+
   return (
-    <section className="pdf-page form-sheet relative mx-auto aspect-[210/297] w-full max-w-[794px] overflow-hidden bg-white shadow-xl" dir="rtl">
-      <img src={image} alt={`اصل اردو پولیس رپورٹ فارم صفحہ ${page}`} className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
-      {overlays.map((overlay) => {
-        const value = getField(overlay.id) ?? ""
-        return (
-          <div key={overlay.id} className={`absolute ${overlay.className}`}>
-            {editable ? (
-              <FormField
-                path={overlay.id}
-                label={overlay.label}
-                type={overlay.type}
-                hideLabel
-                rows={8}
-                inputClassName="border-0 bg-white/60 px-1 text-[clamp(10px,1.25vw,17px)] font-semibold leading-relaxed text-black shadow-none focus-visible:ring-1 focus-visible:ring-primary/40"
-              />
-            ) : (
-              <div className="min-h-8 whitespace-pre-wrap bg-white/20 px-1 text-[clamp(10px,1.2vw,16px)] font-semibold leading-relaxed text-black" dir="rtl">{value}</div>
-            )}
+    <section className="pdf-page form-sheet mx-auto w-full max-w-[900px] overflow-hidden rounded-xl border border-emerald-950/15 bg-[#fffdf7] shadow-xl" dir="rtl">
+      <header className="border-b-4 border-emerald-950 bg-emerald-950 px-5 py-6 text-center text-white sm:px-10">
+        <p className="mb-2 text-xs font-medium tracking-[0.22em] text-emerald-200">POLICE INVESTIGATION REPORT · PAGE {page} OF 3</p>
+        <h1 className="urdu-text text-3xl font-bold sm:text-5xl">{title.ur}</h1>
+        <p className="mt-2 text-sm text-emerald-100">{title.en}</p>
+      </header>
+
+      <div className="border-b border-emerald-950/15 bg-[#f4eee1] px-5 py-4 sm:px-10">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div><p className="urdu-text text-sm font-bold text-emerald-950">محکمہ / دفتر</p><div className="mt-2 border-b-2 border-emerald-950/45" /></div>
+          <div><p className="urdu-text text-sm font-bold text-emerald-950">رپورٹ کی حیثیت</p><div className="mt-2 border-b-2 border-emerald-950/45" /></div>
+          <div><p className="urdu-text text-sm font-bold text-emerald-950">صفحہ {page}</p><div className="mt-2 border-b-2 border-emerald-950/45" /></div>
+        </div>
+      </div>
+
+      <div className="grid gap-x-8 gap-y-6 px-5 py-7 sm:grid-cols-2 sm:px-10 sm:py-10">
+        {fields.map((field) => (
+          <div key={field.id} className={field.className}>
+            <FormField
+              path={field.id}
+              label={field.label}
+              type={field.type}
+              rows={field.type === "textarea" ? 10 : 4}
+              inputClassName="border-0 border-b-2 border-emerald-950/45 bg-transparent px-0 py-2 text-base font-semibold text-emerald-950 shadow-none focus-visible:border-emerald-700 focus-visible:ring-0"
+              className="gap-2"
+            />
           </div>
-        )
-      })}
+        ))}
+      </div>
+
+      <footer className="border-t border-emerald-950/15 bg-[#f4eee1] px-5 py-5 sm:px-10">
+        <div className="grid gap-6 sm:grid-cols-3">
+          {['تحریر کنندہ کے دستخط', 'تفتیشی افسر کے دستخط', 'تاریخ و وقت'].map((label) => (
+            <div key={label}><p className="urdu-text text-sm font-bold text-emerald-950">{label}</p><div className="mt-6 border-b-2 border-emerald-950/45" /></div>
+          ))}
+        </div>
+      </footer>
     </section>
   )
 }
+
+export { FORM_IMAGES } from "./form-assets"
